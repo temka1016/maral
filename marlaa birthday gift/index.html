@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Marlaa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0b0c10, #1f2833, #3a1c40, #5c2c54);
+            --text-light: #f5f5f5;
+            --accent: #ff6b81;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            user-select: none;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Page Transitions */
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 1s;
+            z-index: 10;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 20;
+        }
+
+        /* Typography */
+        .script-text {
+            font-family: 'Great Vibes', cursive;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        /* --- Page 1: Gift Box --- */
+        .gift-container {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-container:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-box {
+            font-size: 100px;
+            margin: 20px 0;
+            animation: floatGift 2s ease-in-out infinite;
+        }
+
+        .sparkles {
+            font-size: 30px;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .click-text {
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        @keyframes floatGift {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.5; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* --- Page 2: Countdown (Glass Card) --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .header-title .script-text {
+            font-size: 3.5rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .time-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 75px; /* Тоо томрох тул бага зэрэг өргөсгөв */
+        }
+
+        .time-box span {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .time-box p {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        .until-text {
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        .next-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .next-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* --- Page 3: Reveal --- */
+        .reveal-container {
+            text-align: center;
+        }
+
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #reveal-hb {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .script-text.large {
+            font-size: 5rem;
+            margin-bottom: 10px;
+        }
+
+        .script-text.highlight {
+            font-size: 3.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* --- Page 4: Letter --- */
+        .paper-texture {
+            background: #fdfaf6;
+            color: #333;
+            padding: 50px 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            height: 70vh;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 0 50px rgba(0,0,0,0.05);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .letter-content {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            white-space: pre-wrap;
+            width: 100%;
+        }
+
+        /* --- Page 5: Outro --- */
+        .outro-container {
+            text-align: center;
+            line-height: 2;
+        }
+
+        .creator {
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .final-text {
+            font-size: 3rem;
+            margin-top: 30px;
+        }
+
+        .fade-heart {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-top: 20px;
+            animation: pulseHeart 2s infinite;
+        }
+
+        @keyframes pulseHeart {
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* --- Utilities --- */
+        .click-anywhere {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            opacity: 0.5;
+            animation: pulse 2s infinite;
+        }
+        .click-anywhere.dark { color: #888; }
+
+        /* Hearts & Sparkles */
+        .heart {
+            position: absolute;
+            top: -10vh;
+            font-size: 20px;
+            color: var(--accent);
+            animation: fall linear forwards;
+            z-index: 5;
+            opacity: 0.6;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .cursor-sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            animation: sparkleFade 1s forwards;
+            z-index: 9999;
+        }
+
+        @keyframes sparkleFade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="music/birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Cursor Sparkles Container -->
+    <div id="sparkle-container"></div>
+    
+    <!-- Falling Hearts Container -->
+    <div id="hearts-container"></div>
+
+    <!-- Page 1: Gift Box -->
+    <section id="page1" class="page active">
+        <div class="gift-container" onclick="openGift()">
+            <div class="sparkles">✨</div>
+            <div class="gift-box" id="giftBox">🎁</div>
+            <p class="click-text">Click to open</p>
+        </div>
+    </section>
+
+    <!-- Page 2: Time Elapsed -->
+    <section id="page2" class="page">
+        <div class="glass-card">
+            <h1 class="header-title">Happy Birthday<br><span class="script-text">Marlaa ❤️</span></h1>
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span id="days">00</span><p>Days</p></div>
+                <div class="time-box"><span id="hours">12</span><p>Hours</p></div>
+                <div class="time-box"><span id="minutes">34</span><p>Minutes</p></div>
+                <div class="time-box"><span id="seconds">56</span><p>Seconds</p></div>
+            </div>
+            <p class="until-text">Since the day you were born ✨</p>
+            <button class="next-btn" onclick="nextPage(3)">Үргэлжлүүлэх</button>
+        </div>
+    </section>
+
+    <!-- Page 3: Main Reveal -->
+    <section id="page3" class="page" onclick="nextPage(4)">
+        <div class="reveal-container">
+            <h2 class="reveal-text" id="reveal-hb">Happy Birthday</h2>
+            <h1 class="reveal-text script-text large" id="reveal-name">Marlaa</h1>
+            <h3 class="reveal-text script-text highlight" id="reveal-age">Tuning 19</h3>
+            <p class="click-anywhere">Дэлгэцэнд хүрнэ үү...</p>
+        </div>
+    </section>
+
+    <!-- Page 4: Handwritten Letter -->
+    <section id="page4" class="page" onclick="nextPage(5)">
+        <div class="paper-texture">
+            <div class="letter-content" id="letter-content">
+                <!-- Text will be typed here by JS -->
+            </div>
+            <p class="click-anywhere dark">Дэлгэцэнд хүрнэ үү...</p>
+        </div>
+    </section>
+
+    <!-- Page 5: Creator Message -->
+    <section id="page5" class="page">
+        <div class="outro-container">
+            <p>Made with love ❤️</p>
+            <p class="creator">Temka гаас</p>
+            <p>төрсөн өдөрт чинь зориулан бүтээв.</p>
+            <h2 class="script-text final-text">Happy Birthday Marlaa ✨</h2>
+            <p class="fade-heart">♥</p>
+        </div>
+    </section>
+
+    <script>
+        // Музыка болон хуудас шилжилт
+        let currentStep = 1;
+        const audio = document.getElementById('bgMusic');
+
+        function openGift() {
+            audio.play().catch(e => console.log("Audio play failed:", e));
+            
+            const gift = document.getElementById('giftBox');
+            gift.style.transform = 'scale(1.5)';
+            gift.style.opacity = '0';
+            
+            setTimeout(() => {
+                nextPage(2);
+            }, 800);
+        }
+
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const next = document.getElementById(`page${pageNumber}`);
+            next.classList.add('active');
+            currentStep = pageNumber;
+
+            if (pageNumber === 3) {
+                triggerRevealAnimations();
+            } else if (pageNumber === 4) {
+                typeLetter();
+            }
+        }
+
+        // Page 3: Reveal Animations
+        function triggerRevealAnimations() {
+            setTimeout(() => document.getElementById('reveal-hb').classList.add('show'), 500);
+            setTimeout(() => document.getElementById('reveal-name').classList.add('show'), 1500);
+            setTimeout(() => document.getElementById('reveal-age').classList.add('show'), 2500);
+        }
+
+        // Page 4: Typewriter Effect
+        const letterText = `Dear Marlaa,
+
+Өнөөдөр чиний хамгийн онцгой өдөр.
+
+Чамд аз жаргал,
+инээд хөөр,
+амжилт, 
+сайхан дурсамжаар дүүрэн
+жил байхыг хүсэж байна.
+
+❤️
+
+From Temka`;
+
+        let i = 0;
+        let isTyping = false;
+        function typeLetter() {
+            if (isTyping) return;
+            isTyping = true;
+            const content = document.getElementById('letter-content');
+            content.innerHTML = '';
+            i = 0;
+
+            function typeWriter() {
+                if (i < letterText.length) {
+                    content.innerHTML += letterText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50); 
+                }
+            }
+            setTimeout(typeWriter, 800);
+        }
+
+        // Falling Hearts Effect
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+            
+            document.getElementById('hearts-container').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+        setInterval(createHeart, 500);
+
+        // Cursor Sparkle Effect
+        document.addEventListener('mousemove', (e) => {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('cursor-sparkle');
+            sparkle.style.left = e.pageX + 'px';
+            sparkle.style.top = e.pageY + 'px';
+            document.getElementById('sparkle-container').appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        });
+
+        // Time Elapsed Logic (Өнгөрсөн хугацаа тоолох)
+        const birthDate = new Date("2007-07-31T00:00:00");
+
+        function updateCounter() {
+            const now = new Date().getTime();
+            // Одоогийн цагаас төрсөн өдрийг хасаж өнгөрсөн хугацааг олно
+            const distance = now - birthDate.getTime();
+
+            if (distance < 0) return;
+
+            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+    </script>
+</body>
+</html>
